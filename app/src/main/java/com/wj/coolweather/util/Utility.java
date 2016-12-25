@@ -2,9 +2,13 @@ package com.wj.coolweather.util;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.wj.coolweather.db.City;
 import com.wj.coolweather.db.County;
 import com.wj.coolweather.db.Province;
+import com.wj.coolweather.gson.Temp;
+import com.wj.coolweather.gson.TempAll;
+import com.wj.coolweather.gson.Weather;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,5 +87,28 @@ public class Utility {
             }
         }
         return false;
+    }
+
+    public static Temp hanleWeatherResponse(String response){
+        try{
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent,Temp.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static TempAll hanleWeatherAllResponse(String response){
+        try{
+            Gson gson = new Gson();
+            return gson.fromJson(response,TempAll.class);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return null;
     }
 }
