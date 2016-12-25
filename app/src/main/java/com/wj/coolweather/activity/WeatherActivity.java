@@ -1,5 +1,6 @@
 package com.wj.coolweather.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -26,6 +27,7 @@ import com.wj.coolweather.gson.Forecast;
 import com.wj.coolweather.gson.Temp;
 import com.wj.coolweather.gson.TempAll;
 import com.wj.coolweather.gson.Weather;
+import com.wj.coolweather.service.AutoUpdateService;
 import com.wj.coolweather.util.HttpUtil;
 import com.wj.coolweather.util.Utility;
 
@@ -203,6 +205,8 @@ public class WeatherActivity extends AppCompatActivity {
 
 
     private void showWeatherInfo(TempAll tempAll){
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
         String cityName = tempAll.getHeWeather().get(0).getBasic().getCity();
         String updateTime = tempAll.getHeWeather().get(0).getBasic().getUpdate().getLoc().split(" ")[1];
         String degree = tempAll.getHeWeather().get(0).getNow().getTmp()+"C";
