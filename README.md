@@ -26,7 +26,7 @@ NewCoolWeather
   
 ### 比如我们可以在多行文本框里输入一段代码,来一个Java版本的HelloWorld吧 
 
- public class HelloWorld {  
+    public class HelloWorld {  
       /**  
         * @param args  
         */  
